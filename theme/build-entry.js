@@ -1,3 +1,4 @@
+const React = require('react');
 const { renderToString } = require('react-dom/server');
 const { ServerStyleSheet } = require('styled-components');
 const Resume = require('./src/Resume').default;
