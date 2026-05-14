@@ -1,21 +1,218 @@
 {
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json",
   "basics": {
     "name": "Stephen Burks",
-    "label": "Software Engineer",
-    "email": "",
-    "phone": "",
-    "url": "",
-    "summary": "",
+    "label": "Software Engineer II",
+    "email": "burksy.dev@gmail.com",
+    "phone": "971.202.0284",
+    "summary": "Full-stack engineer with 5+ years experience shipping production features at scale. For the past 18 months I've served as acting tech lead for Columbia Sportswear's Accounts & Membership platform owning architecture, mentoring engineers, and delivering end-to-end across auth, loyalty, and observability. Before engineering I was a teacher, and the best part of both is building something that actually helps someone.",
     "location": {
-      "city": "",
-      "countryCode": ""
+      "city": "Portland",
+      "region": "Oregon",
+      "countryCode": "US",
+      "address": "(Open to Remote)"
     },
-    "profiles": [{
-      "network": "GitHub",
-      "url": "https://github.com/stephenburks"
-    }]
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/stephenburks-developer",
+        "username": "@stephenburks"
+      }
+    ]
   },
-  "work": [],
-  "education": [],
-  "skills": []
+  "work": [
+    {
+      "name": "Columbia Sportswear Company",
+      "location": "Portland, Oregon, United States",
+      "description": "Outdoor apparel and sportswear company",
+      "position": "Software Engineer II, Acting Tech Lead - Accounts & Membership",
+      "url": "https://www.columbiasportswear.com",
+      "startDate": "2025-01",
+      "summary": "Stepped into tech lead responsibilities as the team contracted from 9 to 3; own technical direction, final reviews, and daily mentorship of offshore contractors. Leading a full rearchitecture from a legacy stack to a modern React-based platform.",
+      "highlights": [
+        "Leading a full rearchitecture from a legacy stack to a modern React-based platform redesigning OAuth/SSO flows, building shared middleware, and restructuring APIs for client-side performance",
+        "Designed shared infrastructure that unblocked the migration, preserved backward compatibility, and was adopted by other teams",
+        "Built observability from scratch for authentication and account flows - caught a critical issue during what became the highest-grossing demand hour in company history",
+        "Delivered multiple international product launches end-to-end, on schedule",
+        "AI Developer Tiger Team: prototyped agent-based developer workflows and wrote the org's guidance on responsible AI tooling integration"
+      ]
+    },
+    {
+      "name": "Columbia Sportswear Company",
+      "location": "Portland, Oregon, United States",
+      "description": "Outdoor apparel and sportswear company",
+      "position": "Software Engineer II - AC/DC Team",
+      "url": "https://www.columbiasportswear.com",
+      "startDate": "2022-10",
+      "endDate": "2025-01",
+      "summary": "Core contributor on a loyalty platform migration, delivering new functionality and resolving launch-blocking issues across a complex vendor transition.",
+      "highlights": [
+        "Led the end-to-end technical migration from SFRA to PWA Kit for the Accounts & Membership team, building React components and custom API endpoints with full backward-compatibility support",
+        "Architected a React-based loyalty system using custom hooks and the Context API, introducing strategic caching and state-management patterns that significantly improved data consistency",
+        "Architected the data model behind a progressive-profiling launch, enabling brand-specific personalization with minimal ongoing overhead",
+        "Co-authored the technical specification and drove performance improvements for a flagship membership relaunch that shipped on time",
+        "Contributed to a major membership re-platforming effort, migrating loyalty services and customer data to a new third-party provider while preserving a seamless experience for millions of users across 4+ brands",
+        "Invested in developer experience - tooling, documentation, and dependency health measurably improving day-to-day workflow for the broader engineering org"
+      ]
+    },
+    {
+      "name": "Hanna Andersson",
+      "location": "Portland, Oregon, United States",
+      "position": "Frontend Developer (SFCC)",
+      "startDate": "2020-02",
+      "endDate": "2022-10",
+      "summary": "Front-end development in the SFCC ecosystem; focus on accessibility (ADA/WCAG), Core Web Vitals performance, and third-party integrations.",
+      "highlights": [
+        "Built accessible, ADA-compliant user experiences using JavaScript, HTML5, and CSS3",
+        "Improved Core Web Vitals and overall site performance through targeted code optimizations",
+        "Integrated third-party services to expand business functionality and streamline user flows",
+        "Collaborated with UX/UI teams to deliver responsive, inclusive, and visually consistent web experiences"
+      ]
+    },
+    {
+      "name": "Effective Web Solutions",
+      "location": "Washougal, WA",
+      "position": "Front End Web Developer & SEO Specialist",
+      "startDate": "2019-01",
+      "endDate": "2020-02",
+      "highlights": [
+        "Developed WordPress websites with focus on SEO optimization and performance"
+      ]
+    },
+    {
+      "name": "Methodical Designs",
+      "location": "Remote",
+      "position": "Freelance WordPress Web Developer",
+      "url": "https://www.methodicaldesigns.com",
+      "startDate": "2015-11",
+      "endDate": "2020-01",
+      "summary": "Freelance web development business specializing in WordPress solutions for small businesses."
+    },
+    {
+      "name": "Coding With Kids",
+      "location": "Portland, Oregon Area",
+      "position": "Afterschool Instructor",
+      "startDate": "2018-11",
+      "endDate": "2019-01",
+      "highlights": [
+        "Taught coding fundamentals to elementary and middle school students"
+      ]
+    },
+    {
+      "name": "EDUCAnet - gymnázium, střední odborná a základní škola Praha",
+      "location": "Prague, Czech Republic",
+      "position": "English Second Language Teacher",
+      "startDate": "2017-08",
+      "endDate": "2018-07",
+      "highlights": [
+        "Taught English as a second language to students in Prague"
+      ]
+    },
+    {
+      "name": "Anderson School District #4",
+      "location": "Pendleton, South Carolina",
+      "position": "Elementary School Teacher",
+      "startDate": "2015-08",
+      "endDate": "2017",
+      "highlights": [
+        "Taught elementary education with emphasis in Mathematics & Science"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Clemson University",
+      "url": "https://www.clemson.edu",
+      "area": "Elementary Education",
+      "studyType": "Bachelor of Arts",
+      "startDate": "2012",
+      "endDate": "2015",
+      "courses": [
+        "Mathematics Emphasis",
+        "Science Emphasis"
+      ]
+    },
+    {
+      "institution": "College of Charleston",
+      "url": "https://www.cofc.edu",
+      "area": "Elementary Education and Teaching",
+      "studyType": "Bachelor of Arts",
+      "startDate": "2011",
+      "endDate": "2012"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Best In Show",
+      "date": "2023",
+      "awarder": "Columbia Sportswear CDT Hackathon",
+      "summary": "Won Best In Show at the Columbia Sportswear Company Hackathon"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages & Frameworks",
+      "keywords": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "React Hooks",
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Architecture & APIs",
+      "keywords": [
+        "REST",
+        "Custom API Development",
+        "OAuth/SLAS",
+        "SCAPI",
+        "OCAPI"
+      ]
+    },
+    {
+      "name": "Platforms & Tooling",
+      "keywords": [
+        "AWS S3",
+        "Grafana",
+        "TanStack Query",
+        "Context API",
+        "Chakra UI",
+        "SFCC",
+        "SFRA",
+        "PWA Kit Composable"
+      ]
+    },
+    {
+      "name": "Practices",
+      "keywords": [
+        "WCAG Accessibility",
+        "Technical Documentation",
+        "Mentorship & Onboarding",
+        "AI Agent Tooling"
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "name": "EdTech",
+      "keywords": []
+    },
+    {
+      "name": "Open Source",
+      "keywords": []
+    },
+    {
+      "name": "Climate Tech",
+      "keywords": []
+    },
+    {
+      "name": "Medical Tech",
+      "keywords": []
+    },
+    {
+      "name": "Sustainable Outdoor Projects",
+      "keywords": []
+    }
+  ]
 }
