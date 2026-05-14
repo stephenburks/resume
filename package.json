@@ -1,8 +1,11 @@
 {
-  "name": "resume",
+  "name": "resume-theme",
   "private": true,
   "dependencies": {
-    "jsonresume-theme-developer-mono": "^0.1.0",
-    "@resume/core": "file:./packages/resume-core"
+    "@resume/core": "file:./packages/resume-core",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0"
   }
 }

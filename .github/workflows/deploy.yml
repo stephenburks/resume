@@ -19,15 +19,12 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
+      - name: Build theme
+        run: npx esbuild theme/index.js theme/src/Resume.jsx --outdir=theme/dist --bundle --platform=node --external:react --external:react-dom --external:styled-components --external:@resume/core --format=cjs --loader:.js=jsx
       - name: Install resume-cli
         run: npm install -g resume-cli
-      - name: Compile theme JSX
-        run: npx esbuild node_modules/jsonresume-theme-developer-mono/index.js node_modules/jsonresume-theme-developer-mono/src/Resume.jsx --outdir=node_modules/jsonresume-theme-developer-mono/dist --bundle --platform=node --external:react --external:react-dom --external:styled-components --format=cjs --loader:.js=jsx
-      - name: Patch theme entry point
-        run: |
-          echo 'module.exports = require("./dist/index");' > node_modules/jsonresume-theme-developer-mono/index.js
       - name: Export to HTML
-        run: resume export resume.html --theme jsonresume-theme-developer-mono
+        run: resume export resume.html --theme ./theme
       - name: Create index.html
         run: |
           cat > index.html << 'EOF'
