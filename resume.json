@@ -1,0 +1,21 @@
+{
+  "basics": {
+    "name": "Stephen Burks",
+    "label": "Software Engineer",
+    "email": "",
+    "phone": "",
+    "url": "",
+    "summary": "",
+    "location": {
+      "city": "",
+      "countryCode": ""
+    },
+    "profiles": [{
+      "network": "GitHub",
+      "url": "https://github.com/stephenburks"
+    }]
+  },
+  "work": [],
+  "education": [],
+  "skills": []
+}

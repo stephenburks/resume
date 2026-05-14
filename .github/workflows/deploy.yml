@@ -1,0 +1,55 @@
+name: Build and Deploy Resume
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install resume-cli and theme
+        run: |
+          npm install -g resume-cli
+          npm install jsonresume-theme-professional
+      - name: Export to HTML
+        run: resume export resume.html --theme jsonresume-theme-professional
+      - name: Create index.html
+        run: |
+          cat > index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <base href="/resume/">
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Stephen Burks - Resume</title>
+          </head>
+          <body>
+          EOF
+          cat resume.html >> index.html
+          echo '</body></html>' >> index.html
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
