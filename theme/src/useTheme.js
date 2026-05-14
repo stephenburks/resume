@@ -1,33 +1,48 @@
-const STORAGE_KEY = 'resume-theme';
+const React = require("react");
+
+const STORAGE_KEY = "resume-theme";
 
 function getInitialTheme() {
-  if (typeof document === 'undefined') return 'light';
+  if (typeof document === "undefined") return "light";
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === 'dark' || stored === 'light') return stored;
-  } catch (e) {}
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-  return 'light';
+    if (stored === "dark" || stored === "light") return stored;
+  } catch (e) {
+    // Silently fail if localStorage is unavailable
+  }
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+  return "light";
 }
 
 function setTheme(theme) {
   try {
     localStorage.setItem(STORAGE_KEY, theme);
-  } catch (e) {}
-  document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {
+    // Silently fail if localStorage is unavailable
+  }
+  if (typeof document !== "undefined") {
+    document.documentElement.setAttribute("data-theme", theme);
+  }
 }
 
 function useTheme() {
-  var current = getInitialTheme();
+  const [theme, setThemeState] = React.useState(() => getInitialTheme());
 
-  function toggle() {
-    var next = current === 'light' ? 'dark' : 'light';
-    current = next;
-    setTheme(next);
-    window.__resumeTheme = next;
-  }
+  // Sync theme to DOM and localStorage when it changes
+  React.useEffect(() => {
+    setTheme(theme);
+  }, [theme]);
 
-  return { theme: current, toggle: toggle };
+  const toggle = React.useCallback(() => {
+    setThemeState((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  }, []);
+
+  return { theme, toggle };
 }
 
 module.exports = { useTheme, getInitialTheme, setTheme, STORAGE_KEY };
