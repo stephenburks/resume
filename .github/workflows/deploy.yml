@@ -20,9 +20,9 @@ jobs:
       - name: Install resume-cli and theme
         run: |
           npm install -g resume-cli
-          npm install jsonresume-theme-stackoverflow
+          npm install jsonresume-theme-developer-mono
       - name: Export to HTML
-        run: resume export resume.html --theme jsonresume-theme-stackoverflow
+        run: resume export resume.html --theme jsonresume-theme-developer-mono
       - name: Create index.html
         run: |
           cat > index.html << 'EOF'
