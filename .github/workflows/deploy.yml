@@ -17,12 +17,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install resume-cli and theme
-        run: |
-          npm install -g resume-cli
-          npm install jsonresume-theme-even
+      - name: Install dependencies
+        run: npm install
+      - name: Install resume-cli
+        run: npm install -g resume-cli
       - name: Export to HTML
-        run: resume export resume.html --theme jsonresume-theme-even
+        run: resume export resume.html --theme jsonresume-theme-developer-mono
       - name: Create index.html
         run: |
           cat > index.html << 'EOF'

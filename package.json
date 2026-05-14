@@ -1,0 +1,8 @@
+{
+  "name": "resume",
+  "private": true,
+  "dependencies": {
+    "jsonresume-theme-developer-mono": "^0.1.0",
+    "@resume/core": "file:./packages/resume-core"
+  }
+}
