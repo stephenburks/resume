@@ -3,6 +3,8 @@
   "private": true,
   "dependencies": {
     "@resume/core": "file:./packages/resume-core",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
