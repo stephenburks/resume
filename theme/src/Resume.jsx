@@ -1,22 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import {
+const React = require('react');
+const styled = require('styled-components').default;
+const {
   Section,
   SectionTitle,
   DateRange,
   ContactInfo,
   Link,
-} from '@resume/core';
+} = require('@resume/core');
+const ThemeToggle = require('./ThemeToggle');
+const { useTheme } = require('./useTheme');
 
 const Layout = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding: 60px 50px;
-  background: #ffffff;
+  background: ${(p) => p.theme.background};
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
-  color: #1f2937;
+  color: ${(p) => p.theme.text};
   line-height: 1.7;
+  transition: background 0.2s ease, color 0.2s ease;
 
   @media print {
     padding: 40px;
@@ -30,14 +33,15 @@ const Layout = styled.div`
 const Header = styled.header`
   margin-bottom: 48px;
   padding-bottom: 24px;
-  border-bottom: 3px solid #2563eb;
+  border-bottom: 3px solid ${(p) => p.theme.headerBorder};
+  position: relative;
 `;
 
 const Name = styled.h1`
   font-size: 48px;
   font-weight: 700;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0 0 12px 0;
   letter-spacing: -1px;
 `;
@@ -46,19 +50,19 @@ const Label = styled.p`
   font-size: 18px;
   font-weight: 500;
   font-family: 'JetBrains Mono', monospace;
-  color: #2563eb;
+  color: ${(p) => p.theme.accent};
   margin: 0 0 20px 0;
   letter-spacing: 0.5px;
 `;
 
 const StyledContactInfo = styled(ContactInfo)`
   font-size: 15px;
-  color: #6b7280;
+  color: ${(p) => p.theme.muted};
   margin-bottom: 20px;
 
   a {
     font-size: 15px;
-    color: #2563eb;
+    color: ${(p) => p.theme.accent};
     text-decoration: none;
     font-family: 'JetBrains Mono', monospace;
 
@@ -71,7 +75,7 @@ const StyledContactInfo = styled(ContactInfo)`
 const Summary = styled.p`
   font-size: 16px;
   line-height: 1.8;
-  color: #374151;
+  color: ${(p) => p.theme.textSecondary};
   margin: 20px 0 0 0;
   max-width: 750px;
 `;
@@ -84,32 +88,32 @@ const StyledSectionTitle = styled(SectionTitle)`
   font-size: 20px;
   font-weight: 700;
   font-family: 'JetBrains Mono', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0 0 24px 0;
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 8px 0;
-  border-bottom: 2px solid #e5e7eb;
+  border-bottom: 2px solid ${(p) => p.theme.sectionTitleBorder};
   display: inline-block;
   min-width: 200px;
 
   &::before {
     content: '# ';
-    color: #2563eb;
+    color: ${(p) => p.theme.accent};
   }
 `;
 
 const WorkItem = styled.div`
   margin-bottom: 36px;
   padding-left: 20px;
-  border-left: 3px solid #e5e7eb;
+  border-left: 3px solid ${(p) => p.theme.border};
 
   &:last-child {
     margin-bottom: 0;
   }
 
   &:hover {
-    border-left-color: #2563eb;
+    border-left-color: ${(p) => p.theme.borderHover};
   }
 `;
 
@@ -130,26 +134,26 @@ const Position = styled.h3`
   font-size: 18px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0;
 `;
 
 const Company = styled.div`
   font-size: 16px;
   font-weight: 500;
-  color: #2563eb;
+  color: ${(p) => p.theme.accent};
   margin-top: 4px;
 `;
 
 const StyledDateRange = styled(DateRange)`
   font-size: 14px;
   font-family: 'JetBrains Mono', monospace;
-  color: #6b7280;
+  color: ${(p) => p.theme.muted};
 `;
 
 const WorkSummary = styled.p`
   margin: 12px 0;
-  color: #4b5563;
+  color: ${(p) => p.theme.textTertiary};
   line-height: 1.7;
   font-size: 15px;
 `;
@@ -163,14 +167,14 @@ const HighlightsList = styled.ul`
     position: relative;
     margin-bottom: 8px;
     padding-left: 0;
-    color: #374151;
+    color: ${(p) => p.theme.textSecondary};
     line-height: 1.7;
 
     &::before {
       content: '→';
       position: absolute;
       left: -20px;
-      color: #2563eb;
+      color: ${(p) => p.theme.accent};
       font-weight: bold;
     }
   }
@@ -179,9 +183,10 @@ const HighlightsList = styled.ul`
 const EducationItem = styled.div`
   margin-bottom: 28px;
   padding: 20px;
-  background: #f9fafb;
-  border-left: 3px solid #2563eb;
+  background: ${(p) => p.theme.cardBg};
+  border-left: 3px solid ${(p) => p.theme.accent};
   border-radius: 2px;
+  transition: background 0.2s ease;
 
   &:last-child {
     margin-bottom: 0;
@@ -201,19 +206,19 @@ const Degree = styled.h3`
   font-size: 17px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0;
 `;
 
 const Institution = styled.div`
   font-size: 15px;
-  color: #6b7280;
+  color: ${(p) => p.theme.muted};
   margin-top: 4px;
 `;
 
 const StudyType = styled.div`
   font-size: 14px;
-  color: #2563eb;
+  color: ${(p) => p.theme.accent};
   margin-top: 4px;
 `;
 
@@ -225,14 +230,14 @@ const SkillsGrid = styled.div`
 
 const SkillCard = styled.div`
   padding: 16px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: ${(p) => p.theme.cardBg};
+  border: 1px solid ${(p) => p.theme.border};
   border-radius: 2px;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: #2563eb;
-    background: #eff6ff;
+    border-color: ${(p) => p.theme.borderHover};
+    background: ${(p) => p.theme.cardBgHover};
   }
 `;
 
@@ -240,20 +245,20 @@ const SkillName = styled.h4`
   font-size: 15px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0 0 10px 0;
 `;
 
 const KeywordList = styled.div`
   font-size: 13px;
-  color: #6b7280;
+  color: ${(p) => p.theme.muted};
   line-height: 1.6;
 `;
 
 const ProjectItem = styled.div`
   margin-bottom: 32px;
   padding-bottom: 32px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid ${(p) => p.theme.border};
 
   &:last-child {
     border-bottom: none;
@@ -270,13 +275,13 @@ const ProjectName = styled.h3`
   font-size: 17px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0 0 8px 0;
 `;
 
 const ProjectDescription = styled.p`
   font-size: 15px;
-  color: #4b5563;
+  color: ${(p) => p.theme.textTertiary};
   line-height: 1.7;
   margin: 0;
 `;
@@ -290,14 +295,14 @@ const ProjectHighlights = styled.ul`
     position: relative;
     margin-bottom: 6px;
     padding-left: 0;
-    color: #4b5563;
+    color: ${(p) => p.theme.textTertiary};
     font-size: 14px;
 
     &::before {
       content: '•';
       position: absolute;
       left: -20px;
-      color: #2563eb;
+      color: ${(p) => p.theme.accent};
     }
   }
 `;
@@ -310,286 +315,230 @@ const SimpleList = styled.div`
 
 const SimpleItem = styled.div`
   padding: 16px;
-  background: #f9fafb;
-  border-left: 2px solid #2563eb;
+  background: ${(p) => p.theme.cardBg};
+  border-left: 2px solid ${(p) => p.theme.accent};
   border-radius: 2px;
+  transition: background 0.2s ease;
 `;
 
 const ItemTitle = styled.h4`
   font-size: 15px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: #111827;
+  color: ${(p) => p.theme.text};
   margin: 0 0 8px 0;
 `;
 
 const ItemMeta = styled.div`
   font-size: 13px;
-  color: #6b7280;
+  color: ${(p) => p.theme.muted};
   margin-bottom: 6px;
 `;
 
 const ItemDescription = styled.p`
   font-size: 14px;
-  color: #4b5563;
+  color: ${(p) => p.theme.textTertiary};
   margin: 8px 0 0 0;
   line-height: 1.6;
 `;
 
-const CodeBlock = styled.pre`
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  color: #1f2937;
-  background: #f9fafb;
-  padding: 2px 6px;
-  border-radius: 2px;
-  display: inline;
-`;
-
 function Resume({ resume }) {
-  const {
-    basics = {},
-    work = [],
-    education = [],
-    skills = [],
-    projects = [],
-    volunteer = [],
-    awards = [],
-    publications = [],
-    languages = [],
-    interests = [],
-    references = [],
-  } = resume;
+  var themeHook = useTheme();
+  var theme = themeHook.theme;
+  var toggle = themeHook.toggle;
 
-  return (
-    <Layout>
-      <Header>
-        <Name>{basics.name}</Name>
-        {basics.label && <Label>{basics.label}</Label>}
-        <StyledContactInfo basics={basics} />
-        {basics.summary && <Summary>{basics.summary}</Summary>}
-      </Header>
+  var basics = resume.basics || {};
+  var work = resume.work || [];
+  var education = resume.education || [];
+  var skills = resume.skills || [];
+  var projects = resume.projects || [];
+  var volunteer = resume.volunteer || [];
+  var awards = resume.awards || [];
+  var publications = resume.publications || [];
+  var languages = resume.languages || [];
+  var interests = resume.interests || [];
+  var references = resume.references || [];
 
-      {work && work.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Experience</StyledSectionTitle>
-          {work.map((job, index) => (
-            <WorkItem key={index}>
-              <WorkHeader>
-                <WorkTitle>
-                  <div>
-                    <Position>{job.position}</Position>
-                    <Company>{job.name}</Company>
-                  </div>
-                  <StyledDateRange
-                    startDate={job.startDate}
-                    endDate={job.endDate}
-                  />
-                </WorkTitle>
-              </WorkHeader>
-              {job.summary && <WorkSummary>{job.summary}</WorkSummary>}
-              {job.highlights && job.highlights.length > 0 && (
-                <HighlightsList>
-                  {job.highlights.map((highlight, i) => (
-                    <li
-                      key={i}
-                      dangerouslySetInnerHTML={{ __html: highlight }}
-                    />
-                  ))}
-                </HighlightsList>
-              )}
-            </WorkItem>
-          ))}
-        </StyledSection>
-      )}
+  return React.createElement(Layout, null,
+    React.createElement(Header, null,
+      React.createElement(ThemeToggle, { theme: theme, onToggle: toggle }),
+      React.createElement(Name, null, basics.name),
+      basics.label && React.createElement(Label, null, basics.label),
+      React.createElement(StyledContactInfo, { basics: basics }),
+      basics.summary && React.createElement(Summary, null, basics.summary)
+    ),
 
-      {skills && skills.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Skills</StyledSectionTitle>
-          <SkillsGrid>
-            {skills.map((skill, index) => (
-              <SkillCard key={index}>
-                <SkillName>{skill.name}</SkillName>
-                {skill.keywords && skill.keywords.length > 0 && (
-                  <KeywordList>{skill.keywords.join(' • ')}</KeywordList>
-                )}
-              </SkillCard>
-            ))}
-          </SkillsGrid>
-        </StyledSection>
-      )}
+    work.length > 0 && React.createElement(StyledSection, { key: 'work' },
+      React.createElement(StyledSectionTitle, null, 'Experience'),
+      work.map(function(job, index) {
+        return React.createElement(WorkItem, { key: index },
+          React.createElement(WorkHeader, null,
+            React.createElement(WorkTitle, null,
+              React.createElement('div', null,
+                React.createElement(Position, null, job.position),
+                React.createElement(Company, null, job.name)
+              ),
+              React.createElement(StyledDateRange, {
+                startDate: job.startDate,
+                endDate: job.endDate
+              })
+            )
+          ),
+          job.summary && React.createElement(WorkSummary, null, job.summary),
+          job.highlights && job.highlights.length > 0 && React.createElement(HighlightsList, null,
+            job.highlights.map(function(highlight, i) {
+              return React.createElement('li', {
+                key: i,
+                dangerouslySetInnerHTML: { __html: highlight }
+              });
+            })
+          )
+        );
+      })
+    ),
 
-      {education && education.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Education</StyledSectionTitle>
-          {education.map((edu, index) => (
-            <EducationItem key={index}>
-              <EducationHeader>
-                <div>
-                  <Degree>{edu.area}</Degree>
-                  {edu.studyType && <StudyType>{edu.studyType}</StudyType>}
-                  <Institution>{edu.institution}</Institution>
-                </div>
-                <StyledDateRange
-                  startDate={edu.startDate}
-                  endDate={edu.endDate}
-                />
-              </EducationHeader>
-              {edu.score && <ItemMeta>GPA: {edu.score}</ItemMeta>}
-              {edu.courses && edu.courses.length > 0 && (
-                <ItemDescription>{edu.courses.join(', ')}</ItemDescription>
-              )}
-            </EducationItem>
-          ))}
-        </StyledSection>
-      )}
+    skills.length > 0 && React.createElement(StyledSection, { key: 'skills' },
+      React.createElement(StyledSectionTitle, null, 'Skills'),
+      React.createElement(SkillsGrid, null,
+        skills.map(function(skill, index) {
+          return React.createElement(SkillCard, { key: index },
+            React.createElement(SkillName, null, skill.name),
+            skill.keywords && skill.keywords.length > 0 && React.createElement(KeywordList, null, skill.keywords.join(' \u2022 '))
+          );
+        })
+      )
+    ),
 
-      {projects && projects.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Projects</StyledSectionTitle>
-          {projects.map((project, index) => (
-            <ProjectItem key={index}>
-              <ProjectHeader>
-                <ProjectName>
-                  {project.url ? (
-                    <Link href={project.url}>{project.name}</Link>
-                  ) : (
-                    project.name
-                  )}
-                </ProjectName>
-                {project.description && (
-                  <ProjectDescription>{project.description}</ProjectDescription>
-                )}
-              </ProjectHeader>
-              {project.highlights && project.highlights.length > 0 && (
-                <ProjectHighlights>
-                  {project.highlights.map((highlight, i) => (
-                    <li key={i}>{highlight}</li>
-                  ))}
-                </ProjectHighlights>
-              )}
-            </ProjectItem>
-          ))}
-        </StyledSection>
-      )}
+    education.length > 0 && React.createElement(StyledSection, { key: 'education' },
+      React.createElement(StyledSectionTitle, null, 'Education'),
+      education.map(function(edu, index) {
+        return React.createElement(EducationItem, { key: index },
+          React.createElement(EducationHeader, null,
+            React.createElement('div', null,
+              React.createElement(Degree, null, edu.area),
+              edu.studyType && React.createElement(StudyType, null, edu.studyType),
+              React.createElement(Institution, null, edu.institution)
+            ),
+            React.createElement(StyledDateRange, {
+              startDate: edu.startDate,
+              endDate: edu.endDate
+            })
+          ),
+          edu.score && React.createElement(ItemMeta, null, 'GPA: ', edu.score),
+          edu.courses && edu.courses.length > 0 && React.createElement(ItemDescription, null, edu.courses.join(', '))
+        );
+      })
+    ),
 
-      {volunteer && volunteer.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Volunteer</StyledSectionTitle>
-          <SimpleList>
-            {volunteer.map((vol, index) => (
-              <SimpleItem key={index}>
-                <ItemTitle>{vol.position}</ItemTitle>
-                <ItemMeta>
-                  {vol.organization}
-                  {vol.startDate && (
-                    <>
-                      {' • '}
-                      <DateRange
-                        startDate={vol.startDate}
-                        endDate={vol.endDate}
-                      />
-                    </>
-                  )}
-                </ItemMeta>
-                {vol.summary && (
-                  <ItemDescription>{vol.summary}</ItemDescription>
-                )}
-              </SimpleItem>
-            ))}
-          </SimpleList>
-        </StyledSection>
-      )}
+    projects.length > 0 && React.createElement(StyledSection, { key: 'projects' },
+      React.createElement(StyledSectionTitle, null, 'Projects'),
+      projects.map(function(project, index) {
+        return React.createElement(ProjectItem, { key: index },
+          React.createElement(ProjectHeader, null,
+            React.createElement(ProjectName, null,
+              project.url ? React.createElement(Link, { href: project.url }, project.name) : project.name
+            ),
+            project.description && React.createElement(ProjectDescription, null, project.description)
+          ),
+          project.highlights && project.highlights.length > 0 && React.createElement(ProjectHighlights, null,
+            project.highlights.map(function(highlight, i) {
+              return React.createElement('li', { key: i }, highlight);
+            })
+          )
+        );
+      })
+    ),
 
-      {awards && awards.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Awards</StyledSectionTitle>
-          <SimpleList>
-            {awards.map((award, index) => (
-              <SimpleItem key={index}>
-                <ItemTitle>{award.title}</ItemTitle>
-                <ItemMeta>
-                  {award.awarder}
-                  {award.date && <> • {award.date}</>}
-                </ItemMeta>
-                {award.summary && (
-                  <ItemDescription>{award.summary}</ItemDescription>
-                )}
-              </SimpleItem>
-            ))}
-          </SimpleList>
-        </StyledSection>
-      )}
+    volunteer.length > 0 && React.createElement(StyledSection, { key: 'volunteer' },
+      React.createElement(StyledSectionTitle, null, 'Volunteer'),
+      React.createElement(SimpleList, null,
+        volunteer.map(function(vol, index) {
+          return React.createElement(SimpleItem, { key: index },
+            React.createElement(ItemTitle, null, vol.position),
+            React.createElement(ItemMeta, null,
+              vol.organization,
+              vol.startDate && React.createElement(React.Fragment, null,
+                ' \u2022 ',
+                React.createElement(DateRange, {
+                  startDate: vol.startDate,
+                  endDate: vol.endDate
+                })
+              )
+            ),
+            vol.summary && React.createElement(ItemDescription, null, vol.summary)
+          );
+        })
+      )
+    ),
 
-      {publications && publications.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Publications</StyledSectionTitle>
-          {publications.map((pub, index) => (
-            <ProjectItem key={index}>
-              <ProjectHeader>
-                <ProjectName>
-                  {pub.url ? <Link href={pub.url}>{pub.name}</Link> : pub.name}
-                </ProjectName>
-                <ItemMeta>
-                  {pub.publisher}
-                  {pub.releaseDate && <> • {pub.releaseDate}</>}
-                </ItemMeta>
-              </ProjectHeader>
-              {pub.summary && (
-                <ProjectDescription>{pub.summary}</ProjectDescription>
-              )}
-            </ProjectItem>
-          ))}
-        </StyledSection>
-      )}
+    awards.length > 0 && React.createElement(StyledSection, { key: 'awards' },
+      React.createElement(StyledSectionTitle, null, 'Awards'),
+      React.createElement(SimpleList, null,
+        awards.map(function(award, index) {
+          return React.createElement(SimpleItem, { key: index },
+            React.createElement(ItemTitle, null, award.title),
+            React.createElement(ItemMeta, null,
+              award.awarder,
+              award.date && React.createElement(React.Fragment, null, ' \u2022 ', award.date)
+            ),
+            award.summary && React.createElement(ItemDescription, null, award.summary)
+          );
+        })
+      )
+    ),
 
-      {languages && languages.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Languages</StyledSectionTitle>
-          <SimpleList>
-            {languages.map((lang, index) => (
-              <SimpleItem key={index}>
-                <ItemTitle>{lang.language}</ItemTitle>
-                {lang.fluency && <ItemMeta>{lang.fluency}</ItemMeta>}
-              </SimpleItem>
-            ))}
-          </SimpleList>
-        </StyledSection>
-      )}
+    publications.length > 0 && React.createElement(StyledSection, { key: 'publications' },
+      React.createElement(StyledSectionTitle, null, 'Publications'),
+      publications.map(function(pub, index) {
+        return React.createElement(ProjectItem, { key: index },
+          React.createElement(ProjectHeader, null,
+            React.createElement(ProjectName, null,
+              pub.url ? React.createElement(Link, { href: pub.url }, pub.name) : pub.name
+            ),
+            React.createElement(ItemMeta, null,
+              pub.publisher,
+              pub.releaseDate && React.createElement(React.Fragment, null, ' \u2022 ', pub.releaseDate)
+            )
+          ),
+          pub.summary && React.createElement(ProjectDescription, null, pub.summary)
+        );
+      })
+    ),
 
-      {interests && interests.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>Interests</StyledSectionTitle>
-          <SimpleList>
-            {interests.map((interest, index) => (
-              <SimpleItem key={index}>
-                <ItemTitle>{interest.name}</ItemTitle>
-                {interest.keywords && interest.keywords.length > 0 && (
-                  <ItemDescription>
-                    {interest.keywords.join(', ')}
-                  </ItemDescription>
-                )}
-              </SimpleItem>
-            ))}
-          </SimpleList>
-        </StyledSection>
-      )}
+    languages.length > 0 && React.createElement(StyledSection, { key: 'languages' },
+      React.createElement(StyledSectionTitle, null, 'Languages'),
+      React.createElement(SimpleList, null,
+        languages.map(function(lang, index) {
+          return React.createElement(SimpleItem, { key: index },
+            React.createElement(ItemTitle, null, lang.language),
+            lang.fluency && React.createElement(ItemMeta, null, lang.fluency)
+          );
+        })
+      )
+    ),
 
-      {references && references.length > 0 && (
-        <StyledSection>
-          <StyledSectionTitle>References</StyledSectionTitle>
-          {references.map((ref, index) => (
-            <ProjectItem key={index}>
-              <ItemTitle>{ref.name}</ItemTitle>
-              {ref.reference && (
-                <ItemDescription>{ref.reference}</ItemDescription>
-              )}
-            </ProjectItem>
-          ))}
-        </StyledSection>
-      )}
-    </Layout>
+    interests.length > 0 && React.createElement(StyledSection, { key: 'interests' },
+      React.createElement(StyledSectionTitle, null, 'Interests'),
+      React.createElement(SimpleList, null,
+        interests.map(function(interest, index) {
+          return React.createElement(SimpleItem, { key: index },
+            React.createElement(ItemTitle, null, interest.name),
+            interest.keywords && interest.keywords.length > 0 && React.createElement(ItemDescription, null, interest.keywords.join(', '))
+          );
+        })
+      )
+    ),
+
+    references.length > 0 && React.createElement(StyledSection, { key: 'references' },
+      React.createElement(StyledSectionTitle, null, 'References'),
+      references.map(function(ref, index) {
+        return React.createElement(ProjectItem, { key: index },
+          React.createElement(ItemTitle, null, ref.name),
+          ref.reference && React.createElement(ItemDescription, null, ref.reference)
+        );
+      })
+    )
   );
 }
 
-export default Resume;
+module.exports = Resume;
