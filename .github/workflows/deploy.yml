@@ -21,10 +21,8 @@ jobs:
         run: npm ci
       - name: Build theme
         run: npx esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --external:@resume/core --format=cjs
-      - name: Install resume-cli
-        run: npm install -g resume-cli
       - name: Export to HTML
-        run: resume export resume.html --theme ./theme
+        run: npx resume export resume.html --theme ./theme
       - name: Create index.html
         run: sed 's|<head>|<head>\n  <base href="/resume/">|' resume.html > index.html
       - name: Upload artifact
