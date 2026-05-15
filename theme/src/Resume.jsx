@@ -491,145 +491,113 @@ const ResumeHeader = React.memo(function ResumeHeader({ basics, theme, toggle })
 	);
 });
 
+function ResumeSection({ key, title, children }) {
+	if (!children) return null;
+	return React.createElement(
+		StyledSection,
+		{ key },
+		React.createElement(StyledSectionTitle, null, title),
+		children,
+	);
+}
+
 function Resume({ resume }) {
 	const { theme, toggle } = useTheme();
-
 	const basics = resume.basics || {};
-	const work = resume.work || [];
-	const education = resume.education || [];
-	const skills = resume.skills || [];
-	const projects = resume.projects || [];
-	const volunteer = resume.volunteer || [];
-	const awards = resume.awards || [];
-	const publications = resume.publications || [];
-	const languages = resume.languages || [];
-	const interests = resume.interests || [];
-	const references = resume.references || [];
 
 	return React.createElement(
 		Layout,
 		null,
 		React.createElement(ResumeHeader, { basics, theme, toggle }),
 
-		work.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'work' },
-				React.createElement(StyledSectionTitle, null, 'Experience'),
-				work.map((job, index) => React.createElement(WorkItem, { key: index, job })),
-			),
+		ResumeSection({
+			key: 'work',
+			title: 'Experience',
+			children: resume.work && resume.work.length > 0 && resume.work.map((job, index) =>
+				React.createElement(WorkItem, { key: index, job })),
+		}),
 
-		skills.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'skills' },
-				React.createElement(StyledSectionTitle, null, 'Skills'),
-				React.createElement(
-					SkillsGrid,
-					null,
-					skills.map((skill, index) => React.createElement(SkillCardComponent, { key: index, skill })),
-				),
+		ResumeSection({
+			key: 'skills',
+			title: 'Skills',
+			children: resume.skills && resume.skills.length > 0 && React.createElement(
+				SkillsGrid,
+				null,
+				resume.skills.map((skill, index) => React.createElement(SkillCardComponent, { key: index, skill })),
 			),
+		}),
 
-		education.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'education' },
-				React.createElement(StyledSectionTitle, null, 'Education'),
-				education.map((edu, index) => React.createElement(EducationItemComponent, { key: index, edu })),
-			),
+		ResumeSection({
+			key: 'education',
+			title: 'Education',
+			children: resume.education && resume.education.length > 0 && resume.education.map((edu, index) =>
+				React.createElement(EducationItemComponent, { key: index, edu })),
+		}),
 
-		projects.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'projects' },
-				React.createElement(StyledSectionTitle, null, 'Projects'),
-				projects.map((project, index) => React.createElement(ProjectItemComponent, { key: index, project })),
-			),
+		ResumeSection({
+			key: 'projects',
+			title: 'Projects',
+			children: resume.projects && resume.projects.length > 0 && resume.projects.map((project, index) =>
+				React.createElement(ProjectItemComponent, { key: index, project })),
+		}),
 
-		volunteer.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'volunteer' },
-				React.createElement(StyledSectionTitle, null, 'Volunteer'),
-				React.createElement(
-					SimpleList,
-					null,
-					volunteer.map((vol, index) =>
-						React.createElement(VolunteerItem, {
-							key: index,
-							item: vol,
-						}),
-					),
-				),
+		ResumeSection({
+			key: 'volunteer',
+			title: 'Volunteer',
+			children: resume.volunteer && resume.volunteer.length > 0 && React.createElement(
+				SimpleList,
+				null,
+				resume.volunteer.map((vol, index) =>
+					React.createElement(VolunteerItem, { key: index, item: vol })),
 			),
+		}),
 
-		awards.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'awards' },
-				React.createElement(StyledSectionTitle, null, 'Awards'),
-				React.createElement(
-					SimpleList,
-					null,
-					awards.map((award, index) =>
-						React.createElement(AwardItem, {
-							key: index,
-							item: award,
-						}),
-					),
-				),
+		ResumeSection({
+			key: 'awards',
+			title: 'Awards',
+			children: resume.awards && resume.awards.length > 0 && React.createElement(
+				SimpleList,
+				null,
+				resume.awards.map((award, index) =>
+					React.createElement(AwardItem, { key: index, item: award })),
 			),
+		}),
 
-		publications.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'publications' },
-				React.createElement(StyledSectionTitle, null, 'Publications'),
-				publications.map((pub, index) => React.createElement(PublicationItemComponent, { key: index, pub })),
-			),
+		ResumeSection({
+			key: 'publications',
+			title: 'Publications',
+			children: resume.publications && resume.publications.length > 0 && resume.publications.map((pub, index) =>
+				React.createElement(PublicationItemComponent, { key: index, pub })),
+		}),
 
-		languages.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'languages' },
-				React.createElement(StyledSectionTitle, null, 'Languages'),
-				React.createElement(
-					SimpleList,
-					null,
-					languages.map((lang, index) =>
-						React.createElement(LanguageItem, {
-							key: index,
-							item: lang,
-						}),
-					),
-				),
+		ResumeSection({
+			key: 'languages',
+			title: 'Languages',
+			children: resume.languages && resume.languages.length > 0 && React.createElement(
+				SimpleList,
+				null,
+				resume.languages.map((lang, index) =>
+					React.createElement(LanguageItem, { key: index, item: lang })),
 			),
+		}),
 
-		interests.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'interests' },
-				React.createElement(StyledSectionTitle, null, 'Interests'),
-				React.createElement(
-					SimpleList,
-					null,
-					interests.map((interest, index) =>
-						React.createElement(InterestItem, {
-							key: index,
-							item: interest,
-						}),
-					),
-				),
+		ResumeSection({
+			key: 'interests',
+			title: 'Interests',
+			children: resume.interests && resume.interests.length > 0 && React.createElement(
+				SimpleList,
+				null,
+				resume.interests.map((interest, index) =>
+					React.createElement(InterestItem, { key: index, item: interest })),
 			),
+		}),
 
-		references.length > 0 &&
-			React.createElement(
-				StyledSection,
-				{ key: 'references' },
-				React.createElement(StyledSectionTitle, null, 'References'),
-				references.map((ref, index) => React.createElement(ReferenceItemComponent, { key: index, ref })),
-			),
+		ResumeSection({
+			key: 'references',
+			title: 'References',
+			children: resume.references && resume.references.length > 0 && resume.references.map((ref, index) =>
+				React.createElement(ReferenceItemComponent, { key: index, ref })),
+		}),
 	);
 }
 
