@@ -1,9 +1,9 @@
-const React = require("react");
-const { renderToString } = require("react-dom/server");
-const { ServerStyleSheet, ThemeProvider } = require("styled-components");
-const Resume = require("./src/Resume");
-const { getInitialTheme } = require("./src/useTheme");
-const { light, dark } = require("./src/theme");
+const React = require('react');
+const { renderToString } = require('react-dom/server');
+const { ServerStyleSheet, ThemeProvider } = require('styled-components');
+const Resume = require('./src/Resume');
+const { getInitialTheme } = require('./src/useTheme');
+const { light, dark } = require('./src/theme');
 
 // Inline script to prevent flash of unstyled content (FOUC)
 // This runs before React hydrates to set the initial theme
@@ -19,24 +19,16 @@ const noFlashScript = `(function(){
 })();`;
 
 function render(resume) {
-  const theme = getInitialTheme();
-  const themeObj = theme === "dark" ? dark : light;
-  const sheet = new ServerStyleSheet();
+	const theme = getInitialTheme();
+	const themeObj = theme === 'dark' ? dark : light;
+	const sheet = new ServerStyleSheet();
 
-  const html = renderToString(
-    sheet.collectStyles(
-      React.createElement(
-        ThemeProvider,
-        { theme: themeObj },
-        React.createElement(Resume, { resume }),
-      ),
-    ),
-  );
+	const html = renderToString(sheet.collectStyles(React.createElement(ThemeProvider, { theme: themeObj }, React.createElement(Resume, { resume }))));
 
-  const styles = sheet.getStyleTags();
-  const title = (resume.basics && resume.basics.name) || "Resume";
+	const styles = sheet.getStyleTags();
+	const title = (resume.basics && resume.basics.name) || 'Resume';
 
-  return `<!DOCTYPE html>
+	return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">

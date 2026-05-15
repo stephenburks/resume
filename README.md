@@ -65,54 +65,53 @@ resume/
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/yourusername/resume.git
-   cd resume
-   ```
+    ```bash
+    git clone https://github.com/yourusername/resume.git
+    cd resume
+    ```
 
 2. **Install dependencies**
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 3. **Build the theme**
 
-   ```bash
-   npx esbuild theme/build-entry.js \
-     --outfile=theme/dist/index.js \
-     --bundle \
-     --platform=node \
-     --external:@resume/core \
-     --format=cjs
-   ```
+    ```bash
+    npx esbuild theme/build-entry.js \
+      --outfile=theme/dist/index.js \
+      --bundle \
+      --platform=node \
+      --external:@resume/core \
+      --format=cjs
+    ```
 
 4. **Generate HTML**
 
-   ```bash
-   npm install -g resume-cli
-   resume export resume.html --theme ./theme
-   ```
+    ```bash
+    npm install -g resume-cli
+    resume export resume.html --theme ./theme
+    ```
 
-5. **View locally**
-   Open `resume.html` in your browser
+5. **View locally** Open `resume.html` in your browser
 
 ### Deploy to GitHub Pages
 
 1. **Enable GitHub Pages**
-   - Go to repository Settings → Pages
-   - Source: GitHub Actions
+    - Go to repository Settings → Pages
+    - Source: GitHub Actions
 
 2. **Push to main**
 
-   ```bash
-   git add .
-   git commit -m "Update resume"
-   git push origin main
-   ```
+    ```bash
+    git add .
+    git commit -m "Update resume"
+    git push origin main
+    ```
 
 3. **View your resume**
-   - Your resume will be live at: `https://yourusername.github.io/resume/`
+    - Your resume will be live at: `https://yourusername.github.io/resume/`
 
 ## 📝 Editing Your Resume
 
@@ -142,17 +141,17 @@ Edit `theme/src/theme.js`:
 
 ```javascript
 const light = {
-  background: "#ffffff",
-  text: "#1f2937",
-  accent: "#2563eb",
-  // ... more colors
+	background: '#ffffff',
+	text: '#1f2937',
+	accent: '#2563eb',
+	// ... more colors
 };
 
 const dark = {
-  background: "#111827",
-  text: "#f9fafb",
-  accent: "#60a5fa",
-  // ... more colors
+	background: '#111827',
+	text: '#f9fafb',
+	accent: '#60a5fa',
+	// ... more colors
 };
 ```
 

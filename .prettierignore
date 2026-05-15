@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+theme/dist/
+*.min.js
+
+# Skill files (external)
+diegosouzapw-react-best-practices-v5/
+
+# Git
+.git/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
