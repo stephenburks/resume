@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build theme
         run: npx esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --external:@resume/core --format=cjs
       - name: Install resume-cli
