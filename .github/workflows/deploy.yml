@@ -26,20 +26,7 @@ jobs:
       - name: Export to HTML
         run: resume export resume.html --theme ./theme
       - name: Create index.html
-        run: |
-          cat > index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <base href="/resume/">
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Stephen Burks - Resume</title>
-          </head>
-          <body>
-          EOF
-          cat resume.html >> index.html
-          echo '</body></html>' >> index.html
+        run: sed 's|<head>|<head>\n  <base href="/resume/">|' resume.html > index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
