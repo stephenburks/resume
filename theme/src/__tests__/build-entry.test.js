@@ -16,9 +16,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const { render } = require('../../build-entry');
 
-const resume = JSON.parse(
-	fs.readFileSync(path.join(__dirname, '../../../resume.json'), 'utf8'),
-);
+const resume = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../resume.json'), 'utf8'));
 
 describe('render', () => {
 	it('produces valid HTML with DOCTYPE', () => {
