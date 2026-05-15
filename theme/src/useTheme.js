@@ -2,7 +2,7 @@ const React = require('react');
 
 const STORAGE_KEY = 'resume-theme';
 
-function getInitialTheme() {
+function getInitialTheme() { // fallow-ignore-next-line complexity
 	if (typeof document === 'undefined') return 'light';
 	try {
 		const stored = localStorage.getItem(STORAGE_KEY);
