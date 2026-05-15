@@ -75,7 +75,9 @@
 			"position": "Front End Web Developer & SEO Specialist",
 			"startDate": "2019-01",
 			"endDate": "2020-02",
-			"highlights": ["Developed WordPress websites with focus on SEO optimization and performance"]
+			"highlights": [
+				"Developed WordPress websites with focus on SEO optimization and performance"
+			]
 		},
 		{
 			"name": "Methodical Designs",
@@ -149,11 +151,25 @@
 		},
 		{
 			"name": "Platforms & Tooling",
-			"keywords": ["AWS S3", "Grafana", "TanStack Query", "Context API", "Chakra UI", "SFCC", "SFRA", "PWA Kit Composable"]
+			"keywords": [
+				"AWS S3",
+				"Grafana",
+				"TanStack Query",
+				"Context API",
+				"Chakra UI",
+				"SFCC",
+				"SFRA",
+				"PWA Kit Composable"
+			]
 		},
 		{
 			"name": "Practices",
-			"keywords": ["WCAG Accessibility", "Technical Documentation", "Mentorship & Onboarding", "AI Agent Tooling"]
+			"keywords": [
+				"WCAG Accessibility",
+				"Technical Documentation",
+				"Mentorship & Onboarding",
+				"AI Agent Tooling"
+			]
 		}
 	],
 	"interests": [

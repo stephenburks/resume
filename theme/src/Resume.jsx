@@ -353,7 +353,12 @@ const WorkItem = React.memo(function WorkItem({ job }) {
 			React.createElement(
 				WorkTitle,
 				null,
-				React.createElement('div', null, React.createElement(Position, null, job.position), React.createElement(Company, null, job.name)),
+				React.createElement(
+					'div',
+					null,
+					React.createElement(Position, null, job.position),
+					React.createElement(Company, null, job.name),
+				),
 				React.createElement(StyledDateRange, {
 					startDate: job.startDate,
 					endDate: job.endDate,
@@ -366,7 +371,9 @@ const WorkItem = React.memo(function WorkItem({ job }) {
 			React.createElement(
 				HighlightsList,
 				null,
-				job.highlights.map((highlight, i) => React.createElement('li', { key: i }, highlight)),
+				job.highlights.map((highlight, i) =>
+					React.createElement('li', { key: i }, highlight),
+				),
 			),
 	);
 });
@@ -379,20 +386,35 @@ const EducationItemComponent = React.memo(function EducationItemComponent({ edu 
 		React.createElement(
 			EducationHeader,
 			null,
-			React.createElement('div', null, React.createElement(Degree, null, edu.area), edu.studyType && React.createElement(StudyType, null, edu.studyType), React.createElement(Institution, null, edu.institution)),
+			React.createElement(
+				'div',
+				null,
+				React.createElement(Degree, null, edu.area),
+				edu.studyType && React.createElement(StudyType, null, edu.studyType),
+				React.createElement(Institution, null, edu.institution),
+			),
 			React.createElement(StyledDateRange, {
 				startDate: edu.startDate,
 				endDate: edu.endDate,
 			}),
 		),
 		edu.score && React.createElement(ItemMeta, null, 'GPA: ', edu.score),
-		edu.courses && edu.courses.length > 0 && React.createElement(ItemDescription, null, edu.courses.join(', ')),
+		edu.courses &&
+			edu.courses.length > 0 &&
+			React.createElement(ItemDescription, null, edu.courses.join(', ')),
 	);
 });
 
 // Memoized skill card component
 const SkillCardComponent = React.memo(function SkillCardComponent({ skill }) {
-	return React.createElement(SkillCard, null, React.createElement(SkillName, null, skill.name), skill.keywords && skill.keywords.length > 0 && React.createElement(KeywordList, null, skill.keywords.join(' • ')));
+	return React.createElement(
+		SkillCard,
+		null,
+		React.createElement(SkillName, null, skill.name),
+		skill.keywords &&
+			skill.keywords.length > 0 &&
+			React.createElement(KeywordList, null, skill.keywords.join(' • ')),
+	);
 });
 
 // Memoized project item component
@@ -403,15 +425,24 @@ const ProjectItemComponent = React.memo(function ProjectItemComponent({ project 
 		React.createElement(
 			ProjectHeader,
 			null,
-			React.createElement(ProjectName, null, project.url ? React.createElement(Link, { href: project.url }, project.name) : project.name),
-			project.description && React.createElement(ProjectDescription, null, project.description),
+			React.createElement(
+				ProjectName,
+				null,
+				project.url
+					? React.createElement(Link, { href: project.url }, project.name)
+					: project.name,
+			),
+			project.description &&
+				React.createElement(ProjectDescription, null, project.description),
 		),
 		project.highlights &&
 			project.highlights.length > 0 &&
 			React.createElement(
 				ProjectHighlights,
 				null,
-				project.highlights.map((highlight, i) => React.createElement('li', { key: i }, highlight)),
+				project.highlights.map((highlight, i) =>
+					React.createElement('li', { key: i }, highlight),
+				),
 			),
 	);
 });
@@ -445,17 +476,34 @@ const AwardItem = React.memo(function AwardItem({ item }) {
 		SimpleItem,
 		null,
 		React.createElement(ItemTitle, null, item.title),
-		React.createElement(ItemMeta, null, item.awarder, item.date && React.createElement(React.Fragment, null, ' • ', item.date)),
+		React.createElement(
+			ItemMeta,
+			null,
+			item.awarder,
+			item.date && React.createElement(React.Fragment, null, ' • ', item.date),
+		),
 		item.summary && React.createElement(ItemDescription, null, item.summary),
 	);
 });
 
 const LanguageItem = React.memo(function LanguageItem({ item }) {
-	return React.createElement(SimpleItem, null, React.createElement(ItemTitle, null, item.language), item.fluency && React.createElement(ItemMeta, null, item.fluency));
+	return React.createElement(
+		SimpleItem,
+		null,
+		React.createElement(ItemTitle, null, item.language),
+		item.fluency && React.createElement(ItemMeta, null, item.fluency),
+	);
 });
 
 const InterestItem = React.memo(function InterestItem({ item }) {
-	return React.createElement(SimpleItem, null, React.createElement(ItemTitle, null, item.name), item.keywords && item.keywords.length > 0 && React.createElement(ItemDescription, null, item.keywords.join(', ')));
+	return React.createElement(
+		SimpleItem,
+		null,
+		React.createElement(ItemTitle, null, item.name),
+		item.keywords &&
+			item.keywords.length > 0 &&
+			React.createElement(ItemDescription, null, item.keywords.join(', ')),
+	);
 });
 
 // Memoized publication item component
@@ -466,8 +514,18 @@ const PublicationItemComponent = React.memo(function PublicationItemComponent({ 
 		React.createElement(
 			ProjectHeader,
 			null,
-			React.createElement(ProjectName, null, pub.url ? React.createElement(Link, { href: pub.url }, pub.name) : pub.name),
-			React.createElement(ItemMeta, null, pub.publisher, pub.releaseDate && React.createElement(React.Fragment, null, ' • ', pub.releaseDate)),
+			React.createElement(
+				ProjectName,
+				null,
+				pub.url ? React.createElement(Link, { href: pub.url }, pub.name) : pub.name,
+			),
+			React.createElement(
+				ItemMeta,
+				null,
+				pub.publisher,
+				pub.releaseDate &&
+					React.createElement(React.Fragment, null, ' • ', pub.releaseDate),
+			),
 		),
 		pub.summary && React.createElement(ProjectDescription, null, pub.summary),
 	);
@@ -475,7 +533,12 @@ const PublicationItemComponent = React.memo(function PublicationItemComponent({ 
 
 // Memoized reference item component
 const ReferenceItemComponent = React.memo(function ReferenceItemComponent({ reference }) {
-	return React.createElement(ProjectItem, null, React.createElement(ItemTitle, null, reference.name), reference.reference && React.createElement(ItemDescription, null, reference.reference));
+	return React.createElement(
+		ProjectItem,
+		null,
+		React.createElement(ItemTitle, null, reference.name),
+		reference.reference && React.createElement(ItemDescription, null, reference.reference),
+	);
 });
 
 // Memoized header component
@@ -513,90 +576,129 @@ function Resume({ resume }) {
 		ResumeSection({
 			key: 'work',
 			title: 'Experience',
-			children: resume.work && resume.work.length > 0 && resume.work.map((job, index) =>
-				React.createElement(WorkItem, { key: index, job })),
+			children:
+				resume.work &&
+				resume.work.length > 0 &&
+				resume.work.map((job, index) => React.createElement(WorkItem, { key: index, job })),
 		}),
 
 		ResumeSection({
 			key: 'skills',
 			title: 'Skills',
-			children: resume.skills && resume.skills.length > 0 && React.createElement(
-				SkillsGrid,
-				null,
-				resume.skills.map((skill, index) => React.createElement(SkillCardComponent, { key: index, skill })),
-			),
+			children:
+				resume.skills &&
+				resume.skills.length > 0 &&
+				React.createElement(
+					SkillsGrid,
+					null,
+					resume.skills.map((skill, index) =>
+						React.createElement(SkillCardComponent, { key: index, skill }),
+					),
+				),
 		}),
 
 		ResumeSection({
 			key: 'education',
 			title: 'Education',
-			children: resume.education && resume.education.length > 0 && resume.education.map((edu, index) =>
-				React.createElement(EducationItemComponent, { key: index, edu })),
+			children:
+				resume.education &&
+				resume.education.length > 0 &&
+				resume.education.map((edu, index) =>
+					React.createElement(EducationItemComponent, { key: index, edu }),
+				),
 		}),
 
 		ResumeSection({
 			key: 'projects',
 			title: 'Projects',
-			children: resume.projects && resume.projects.length > 0 && resume.projects.map((project, index) =>
-				React.createElement(ProjectItemComponent, { key: index, project })),
+			children:
+				resume.projects &&
+				resume.projects.length > 0 &&
+				resume.projects.map((project, index) =>
+					React.createElement(ProjectItemComponent, { key: index, project }),
+				),
 		}),
 
 		ResumeSection({
 			key: 'volunteer',
 			title: 'Volunteer',
-			children: resume.volunteer && resume.volunteer.length > 0 && React.createElement(
-				SimpleList,
-				null,
-				resume.volunteer.map((vol, index) =>
-					React.createElement(VolunteerItem, { key: index, item: vol })),
-			),
+			children:
+				resume.volunteer &&
+				resume.volunteer.length > 0 &&
+				React.createElement(
+					SimpleList,
+					null,
+					resume.volunteer.map((vol, index) =>
+						React.createElement(VolunteerItem, { key: index, item: vol }),
+					),
+				),
 		}),
 
 		ResumeSection({
 			key: 'awards',
 			title: 'Awards',
-			children: resume.awards && resume.awards.length > 0 && React.createElement(
-				SimpleList,
-				null,
-				resume.awards.map((award, index) =>
-					React.createElement(AwardItem, { key: index, item: award })),
-			),
+			children:
+				resume.awards &&
+				resume.awards.length > 0 &&
+				React.createElement(
+					SimpleList,
+					null,
+					resume.awards.map((award, index) =>
+						React.createElement(AwardItem, { key: index, item: award }),
+					),
+				),
 		}),
 
 		ResumeSection({
 			key: 'publications',
 			title: 'Publications',
-			children: resume.publications && resume.publications.length > 0 && resume.publications.map((pub, index) =>
-				React.createElement(PublicationItemComponent, { key: index, pub })),
+			children:
+				resume.publications &&
+				resume.publications.length > 0 &&
+				resume.publications.map((pub, index) =>
+					React.createElement(PublicationItemComponent, { key: index, pub }),
+				),
 		}),
 
 		ResumeSection({
 			key: 'languages',
 			title: 'Languages',
-			children: resume.languages && resume.languages.length > 0 && React.createElement(
-				SimpleList,
-				null,
-				resume.languages.map((lang, index) =>
-					React.createElement(LanguageItem, { key: index, item: lang })),
-			),
+			children:
+				resume.languages &&
+				resume.languages.length > 0 &&
+				React.createElement(
+					SimpleList,
+					null,
+					resume.languages.map((lang, index) =>
+						React.createElement(LanguageItem, { key: index, item: lang }),
+					),
+				),
 		}),
 
 		ResumeSection({
 			key: 'interests',
 			title: 'Interests',
-			children: resume.interests && resume.interests.length > 0 && React.createElement(
-				SimpleList,
-				null,
-				resume.interests.map((interest, index) =>
-					React.createElement(InterestItem, { key: index, item: interest })),
-			),
+			children:
+				resume.interests &&
+				resume.interests.length > 0 &&
+				React.createElement(
+					SimpleList,
+					null,
+					resume.interests.map((interest, index) =>
+						React.createElement(InterestItem, { key: index, item: interest }),
+					),
+				),
 		}),
 
 		ResumeSection({
 			key: 'references',
 			title: 'References',
-			children: resume.references && resume.references.length > 0 && resume.references.map((ref, index) =>
-				React.createElement(ReferenceItemComponent, { key: index, reference: ref })),
+			children:
+				resume.references &&
+				resume.references.length > 0 &&
+				resume.references.map((ref, index) =>
+					React.createElement(ReferenceItemComponent, { key: index, reference: ref }),
+				),
 		}),
 	);
 }

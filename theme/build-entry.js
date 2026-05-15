@@ -6,7 +6,12 @@ const { getInitialTheme } = require('./src/useTheme');
 const { light, dark } = require('./src/theme');
 
 function escapeHtml(str) {
-	return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+	return str
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#x27;');
 }
 
 // Inline script to prevent flash of unstyled content (FOUC)
@@ -27,7 +32,15 @@ function render(resume) {
 	const themeObj = theme === 'dark' ? dark : light;
 	const sheet = new ServerStyleSheet();
 
-	const html = renderToString(sheet.collectStyles(React.createElement(ThemeProvider, { theme: themeObj }, React.createElement(Resume, { resume }))));
+	const html = renderToString(
+		sheet.collectStyles(
+			React.createElement(
+				ThemeProvider,
+				{ theme: themeObj },
+				React.createElement(Resume, { resume }),
+			),
+		),
+	);
 
 	const styles = sheet.getStyleTags();
 	const title = escapeHtml((resume.basics && resume.basics.name) || 'Resume');
