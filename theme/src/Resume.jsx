@@ -416,51 +416,46 @@ const ProjectItemComponent = React.memo(function ProjectItemComponent({ project 
 	);
 });
 
-// Memoized simple item component for volunteer, awards, etc.
-const SimpleItemComponent = React.memo(function SimpleItemComponent({ item, type }) {
-	if (type === 'volunteer') {
-		return React.createElement(
-			SimpleItem,
+const VolunteerItem = React.memo(function VolunteerItem({ item }) {
+	return React.createElement(
+		SimpleItem,
+		null,
+		React.createElement(ItemTitle, null, item.position),
+		React.createElement(
+			ItemMeta,
 			null,
-			React.createElement(ItemTitle, null, item.position),
-			React.createElement(
-				ItemMeta,
-				null,
-				item.organization,
-				item.startDate &&
-					React.createElement(
-						React.Fragment,
-						null,
-						' • ',
-						React.createElement(DateRange, {
-							startDate: item.startDate,
-							endDate: item.endDate,
-						}),
-					),
-			),
-			item.summary && React.createElement(ItemDescription, null, item.summary),
-		);
-	}
+			item.organization,
+			item.startDate &&
+				React.createElement(
+					React.Fragment,
+					null,
+					' • ',
+					React.createElement(DateRange, {
+						startDate: item.startDate,
+						endDate: item.endDate,
+					}),
+				),
+		),
+		item.summary && React.createElement(ItemDescription, null, item.summary),
+	);
+});
 
-	if (type === 'award') {
-		return React.createElement(
-			SimpleItem,
-			null,
-			React.createElement(ItemTitle, null, item.title),
-			React.createElement(ItemMeta, null, item.awarder, item.date && React.createElement(React.Fragment, null, ' • ', item.date)),
-			item.summary && React.createElement(ItemDescription, null, item.summary),
-		);
-	}
+const AwardItem = React.memo(function AwardItem({ item }) {
+	return React.createElement(
+		SimpleItem,
+		null,
+		React.createElement(ItemTitle, null, item.title),
+		React.createElement(ItemMeta, null, item.awarder, item.date && React.createElement(React.Fragment, null, ' • ', item.date)),
+		item.summary && React.createElement(ItemDescription, null, item.summary),
+	);
+});
 
-	if (type === 'language') {
-		return React.createElement(SimpleItem, null, React.createElement(ItemTitle, null, item.language), item.fluency && React.createElement(ItemMeta, null, item.fluency));
-	}
+const LanguageItem = React.memo(function LanguageItem({ item }) {
+	return React.createElement(SimpleItem, null, React.createElement(ItemTitle, null, item.language), item.fluency && React.createElement(ItemMeta, null, item.fluency));
+});
 
-	if (type === 'interest') {
-		return React.createElement(SimpleItem, null, React.createElement(ItemTitle, null, item.name), item.keywords && item.keywords.length > 0 && React.createElement(ItemDescription, null, item.keywords.join(', ')));
-	}
-
-	return null;
+const InterestItem = React.memo(function InterestItem({ item }) {
+	return React.createElement(SimpleItem, null, React.createElement(ItemTitle, null, item.name), item.keywords && item.keywords.length > 0 && React.createElement(ItemDescription, null, item.keywords.join(', ')));
 });
 
 // Memoized publication item component
@@ -561,10 +556,9 @@ function Resume({ resume }) {
 					SimpleList,
 					null,
 					volunteer.map((vol, index) =>
-						React.createElement(SimpleItemComponent, {
+						React.createElement(VolunteerItem, {
 							key: index,
 							item: vol,
-							type: 'volunteer',
 						}),
 					),
 				),
@@ -579,10 +573,9 @@ function Resume({ resume }) {
 					SimpleList,
 					null,
 					awards.map((award, index) =>
-						React.createElement(SimpleItemComponent, {
+						React.createElement(AwardItem, {
 							key: index,
 							item: award,
-							type: 'award',
 						}),
 					),
 				),
@@ -605,10 +598,9 @@ function Resume({ resume }) {
 					SimpleList,
 					null,
 					languages.map((lang, index) =>
-						React.createElement(SimpleItemComponent, {
+						React.createElement(LanguageItem, {
 							key: index,
 							item: lang,
-							type: 'language',
 						}),
 					),
 				),
@@ -623,10 +615,9 @@ function Resume({ resume }) {
 					SimpleList,
 					null,
 					interests.map((interest, index) =>
-						React.createElement(SimpleItemComponent, {
+						React.createElement(InterestItem, {
 							key: index,
 							item: interest,
-							type: 'interest',
 						}),
 					),
 				),
