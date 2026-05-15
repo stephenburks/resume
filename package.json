@@ -4,7 +4,8 @@
 	"scripts": {
 		"build": "esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --external:@resume/core --format=cjs",
 		"format": "prettier --write \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore",
-		"format:check": "prettier --check \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore"
+		"format:check": "prettier --check \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore",
+		"test": "node --test packages/**/__tests__/*.test.js theme/**/__tests__/*.test.js"
 	},
 	"dependencies": {
 		"@resume/core": "file:./packages/resume-core",
