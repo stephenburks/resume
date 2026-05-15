@@ -31,7 +31,7 @@ The dark mode toggle was completely broken and has been fixed:
 - ✅ Removed security vulnerabilities
 - ✅ Functional state updates
 
-See [CHANGES_SUMMARY.md](CHANGES_SUMMARY.md) for detailed changes.
+See the git log for detailed change history.
 
 ## 🏗️ Project Structure
 
