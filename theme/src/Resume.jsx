@@ -474,8 +474,8 @@ const PublicationItemComponent = React.memo(function PublicationItemComponent({ 
 });
 
 // Memoized reference item component
-const ReferenceItemComponent = React.memo(function ReferenceItemComponent({ ref }) {
-	return React.createElement(ProjectItem, null, React.createElement(ItemTitle, null, ref.name), ref.reference && React.createElement(ItemDescription, null, ref.reference));
+const ReferenceItemComponent = React.memo(function ReferenceItemComponent({ reference }) {
+	return React.createElement(ProjectItem, null, React.createElement(ItemTitle, null, reference.name), reference.reference && React.createElement(ItemDescription, null, reference.reference));
 });
 
 // Memoized header component
@@ -596,7 +596,7 @@ function Resume({ resume }) {
 			key: 'references',
 			title: 'References',
 			children: resume.references && resume.references.length > 0 && resume.references.map((ref, index) =>
-				React.createElement(ReferenceItemComponent, { key: index, ref })),
+				React.createElement(ReferenceItemComponent, { key: index, reference: ref })),
 		}),
 	);
 }
