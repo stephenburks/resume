@@ -15,59 +15,19 @@ const DateRange = React.memo(function DateRange({ startDate, endDate }) {
 });
 
 const ContactInfo = React.memo(function ContactInfo({ basics }) {
-	const items = [];
+	const loc = basics.location && [basics.location.city, basics.location.region, basics.location.countryCode].filter(Boolean).join(', ');
 
-	if (basics.email) {
-		items.push(
-			React.createElement(
-				'a',
-				{
-					key: 'email',
-					href: `mailto:${basics.email}`,
-				},
-				basics.email,
-			),
-		);
-	}
-
-	if (basics.phone) {
-		items.push(React.createElement('span', { key: 'phone' }, basics.phone));
-	}
-
-	if (basics.url) {
-		items.push(
-			React.createElement(
-				'a',
-				{
-					key: 'url',
-					href: basics.url,
-				},
-				basics.url,
-			),
-		);
-	}
-
-	if (basics.location) {
-		const loc = [basics.location.city, basics.location.region, basics.location.countryCode].filter(Boolean).join(', ');
-
-		if (loc) {
-			items.push(React.createElement('span', { key: 'location' }, loc));
-		}
-	}
+	const items = [
+		basics.email && React.createElement('a', { key: 'email', href: `mailto:${basics.email}` }, basics.email),
+		basics.phone && React.createElement('span', { key: 'phone' }, basics.phone),
+		basics.url && React.createElement('a', { key: 'url', href: basics.url }, basics.url),
+		loc && React.createElement('span', { key: 'location' }, loc),
+	].filter(Boolean);
 
 	if (basics.profiles) {
 		basics.profiles.forEach((profile) => {
 			if (profile.url) {
-				items.push(
-					React.createElement(
-						'a',
-						{
-							key: profile.network,
-							href: profile.url,
-						},
-						profile.network,
-					),
-				);
+				items.push(React.createElement('a', { key: profile.network, href: profile.url }, profile.network));
 			}
 		});
 	}
