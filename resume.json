@@ -2,15 +2,15 @@
 	"$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json",
 	"basics": {
 		"name": "Stephen Burks",
-		"label": "Software Engineer II",
+		"label": "Software Engineer II (Open to Remote)",
 		"email": "burksy.dev@gmail.com",
 		"phone": "971.202.0284",
+		"url": "https://www.linkedin.com/in/stephenburks-developer",
 		"summary": "Full-stack engineer with 5+ years experience shipping production features at scale. For the past 18 months I've served as acting tech lead for Columbia Sportswear's Accounts & Membership platform owning architecture, mentoring engineers, and delivering end-to-end across auth, loyalty, and observability. Before engineering I was a teacher, and the best part of both is building something that actually helps someone.",
 		"location": {
 			"city": "Portland",
 			"region": "Oregon",
-			"countryCode": "US",
-			"address": "(Open to Remote)"
+			"countryCode": "US"
 		},
 		"profiles": [
 			{
@@ -174,24 +174,19 @@
 	],
 	"interests": [
 		{
-			"name": "EdTech",
-			"keywords": []
+			"name": "EdTech"
 		},
 		{
-			"name": "Open Source",
-			"keywords": []
+			"name": "Open Source"
 		},
 		{
-			"name": "Climate Tech",
-			"keywords": []
+			"name": "Climate Tech"
 		},
 		{
-			"name": "Medical Tech",
-			"keywords": []
+			"name": "Medical Tech"
 		},
 		{
-			"name": "Sustainable Outdoor Projects",
-			"keywords": []
+			"name": "Sustainable Outdoor Projects"
 		}
 	]
 }
