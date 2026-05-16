@@ -2,13 +2,12 @@
 	"name": "resume-theme",
 	"private": true,
 	"scripts": {
-		"build": "esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --external:@resume/core --format=cjs",
+		"build": "esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --format=cjs",
 		"format": "prettier --write \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore",
 		"format:check": "prettier --check \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore",
-		"test": "node --test packages/**/__tests__/*.test.js theme/**/__tests__/*.test.js"
+		"test": "node --test theme/**/__tests__/*.test.js"
 	},
 	"dependencies": {
-		"@resume/core": "file:./packages/resume-core",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"styled-components": "^6.1.19"

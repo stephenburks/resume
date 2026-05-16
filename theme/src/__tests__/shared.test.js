@@ -1,6 +1,6 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
-const { Section, SectionTitle, DateRange, ContactInfo, Link } = require('..');
+const { Section, SectionTitle, DateRange, ContactInfo, Link } = require('../shared');
 
 describe('DateRange', () => {
 	it('renders with both startDate and endDate', () => {

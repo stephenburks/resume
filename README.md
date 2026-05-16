@@ -38,18 +38,30 @@ See the git log for detailed change history.
 ```
 resume/
 ├── .github/workflows/
-│   └── deploy.yml          # GitHub Actions deployment
-├── packages/
-│   └── resume-core/        # Core resume components
-│       └── index.js
+│   └── deploy.yml
 ├── theme/
 │   ├── src/
-│   │   ├── Resume.jsx      # Main resume component
-│   │   ├── ThemeToggle.jsx # Dark mode toggle
-│   │   ├── theme.js        # Theme definitions
-│   │   └── useTheme.js     # Theme hook
-│   ├── build-entry.js      # Build entry point
-│   └── dist/               # Built files
+│   │   ├── Resume.jsx
+│   │   ├── shared.js
+│   │   ├── theme.js
+│   │   ├── ThemeToggle.jsx
+│   │   ├── sections/
+│   │   │   ├── Header.jsx
+│   │   │   ├── SectionWrapper.jsx
+│   │   │   ├── Work.jsx
+│   │   │   ├── Education.jsx
+│   │   │   ├── Skills.jsx
+│   │   │   ├── Projects.jsx
+│   │   │   ├── Volunteer.jsx
+│   │   │   ├── Awards.jsx
+│   │   │   ├── Publications.jsx
+│   │   │   ├── Languages.jsx
+│   │   │   ├── Interests.jsx
+│   │   │   └── References.jsx
+│   │   └── __tests__/
+│   ├── build-entry.js
+│   ├── index.js
+│   └── dist/               # Built output (gitignored)
 ├── resume.json             # Your resume data
 └── package.json
 ```
@@ -83,7 +95,6 @@ resume/
       --outfile=theme/dist/index.js \
       --bundle \
       --platform=node \
-      --external:@resume/core \
       --format=cjs
     ```
 
@@ -141,16 +152,16 @@ Edit `theme/src/theme.js`:
 
 ```javascript
 const light = {
-	background: '#ffffff',
-	text: '#1f2937',
-	accent: '#2563eb',
+	'--background': '#ffffff',
+	'--text': '#1f2937',
+	'--accent': '#2563eb',
 	// ... more colors
 };
 
 const dark = {
-	background: '#111827',
-	text: '#f9fafb',
-	accent: '#60a5fa',
+	'--background': '#111827',
+	'--text': '#f9fafb',
+	'--accent': '#60a5fa',
 	// ... more colors
 };
 ```
@@ -161,7 +172,8 @@ Edit `theme/build-entry.js` to change the Google Fonts import.
 
 ### Layout
 
-Edit `theme/src/Resume.jsx` to modify the structure and styling.
+Edit `theme/src/Resume.jsx` and the section files in `theme/src/sections/` to modify the structure
+and styling.
 
 ## 🧪 Testing
 
@@ -179,7 +191,6 @@ npx esbuild theme/build-entry.js \
   --outfile=theme/dist/index.js \
   --bundle \
   --platform=node \
-  --external:@resume/core \
   --format=cjs
 ```
 

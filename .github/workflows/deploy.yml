@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build theme
-        run: npx esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --external:@resume/core --format=cjs
+        run: npx esbuild theme/build-entry.js --outfile=theme/dist/index.js --bundle --platform=node --format=cjs
       - name: Export to HTML
         run: npx resume export resume.html --theme ./theme
       - name: Create index.html
