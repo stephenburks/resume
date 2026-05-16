@@ -1,39 +1,52 @@
 const light = {
-	background: '#ffffff',
-	cardBg: '#f9fafb',
-	cardBgHover: '#eff6ff',
-	text: '#1f2937',
-	textSecondary: '#374151',
-	textTertiary: '#4b5563',
-	muted: '#6b7280',
-	accent: '#2563eb',
-	border: '#e5e7eb',
-	borderHover: '#2563eb',
-	headerBorder: '#2563eb',
-	sectionTitleBorder: '#e5e7eb',
-	toggleBg: '#f3f4f6',
-	toggleIcon: '#374151',
-	tooltipBg: '#1f2937',
-	tooltipText: '#f9fafb',
+	'--background': '#ffffff',
+	'--card-bg': '#f9fafb',
+	'--card-bg-hover': '#eff6ff',
+	'--text': '#1f2937',
+	'--text-secondary': '#374151',
+	'--text-tertiary': '#4b5563',
+	'--muted': '#6b7280',
+	'--accent': '#2563eb',
+	'--border': '#e5e7eb',
+	'--border-hover': '#2563eb',
+	'--header-border': '#2563eb',
+	'--section-title-border': '#e5e7eb',
+	'--toggle-bg': '#f3f4f6',
+	'--toggle-icon': '#374151',
+	'--tooltip-bg': '#1f2937',
+	'--tooltip-text': '#f9fafb',
 };
 
 const dark = {
-	background: '#111827',
-	cardBg: '#1f2937',
-	cardBgHover: '#1e3a5f',
-	text: '#f9fafb',
-	textSecondary: '#e5e7eb',
-	textTertiary: '#d1d5db',
-	muted: '#9ca3af',
-	accent: '#60a5fa',
-	border: '#374151',
-	borderHover: '#60a5fa',
-	headerBorder: '#60a5fa',
-	sectionTitleBorder: '#374151',
-	toggleBg: '#1f2937',
-	toggleIcon: '#d1d5db',
-	tooltipBg: '#f9fafb',
-	tooltipText: '#1f2937',
+	'--background': '#111827',
+	'--card-bg': '#1f2937',
+	'--card-bg-hover': '#1e3a5f',
+	'--text': '#f9fafb',
+	'--text-secondary': '#e5e7eb',
+	'--text-tertiary': '#d1d5db',
+	'--muted': '#9ca3af',
+	'--accent': '#60a5fa',
+	'--border': '#374151',
+	'--border-hover': '#60a5fa',
+	'--header-border': '#60a5fa',
+	'--section-title-border': '#374151',
+	'--toggle-bg': '#1f2937',
+	'--toggle-icon': '#d1d5db',
+	'--tooltip-bg': '#f9fafb',
+	'--tooltip-text': '#1f2937',
 };
 
-module.exports = { light, dark };
+function buildCssVariables(obj, prefix = '') {
+	return Object.entries(obj)
+		.map(([key, value]) => {
+			const cssVar = prefix + key;
+			return `    ${cssVar}: ${value};`;
+		})
+		.join('\n');
+}
+
+function buildThemeCss(themeObj) {
+	return buildCssVariables(themeObj);
+}
+
+module.exports = { light, dark, buildThemeCss, buildCssVariables };

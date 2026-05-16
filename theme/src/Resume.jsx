@@ -1,21 +1,19 @@
 const React = require('react');
 const styled = require('styled-components').default;
 const { Section, SectionTitle, DateRange, ContactInfo, Link } = require('@resume/core');
-const ThemeToggle = require('./ThemeToggle');
-const { useTheme } = require('./useTheme');
 
 const Layout = styled.div`
 	max-width: 900px;
 	margin: 0 auto;
 	padding: 60px 50px;
-	background: ${(p) => p.theme.background};
+	background: var(--background);
 	font-family:
 		'Inter',
 		-apple-system,
 		BlinkMacSystemFont,
 		'Segoe UI',
 		sans-serif;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	line-height: 1.7;
 	transition:
 		background 0.2s ease,
@@ -33,7 +31,7 @@ const Layout = styled.div`
 const Header = styled.header`
 	margin-bottom: 48px;
 	padding-bottom: 24px;
-	border-bottom: 3px solid ${(p) => p.theme.headerBorder};
+	border-bottom: 3px solid var(--header-border);
 	position: relative;
 `;
 
@@ -41,7 +39,7 @@ const Name = styled.h1`
 	font-size: 48px;
 	font-weight: 700;
 	font-family: 'JetBrains Mono', 'Courier New', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0 0 12px 0;
 	letter-spacing: -1px;
 `;
@@ -50,19 +48,19 @@ const Label = styled.p`
 	font-size: 18px;
 	font-weight: 500;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.accent};
+	color: var(--accent);
 	margin: 0 0 20px 0;
 	letter-spacing: 0.5px;
 `;
 
 const StyledContactInfo = styled(ContactInfo)`
 	font-size: 15px;
-	color: ${(p) => p.theme.muted};
+	color: var(--muted);
 	margin-bottom: 20px;
 
 	a {
 		font-size: 15px;
-		color: ${(p) => p.theme.accent};
+		color: var(--accent);
 		text-decoration: none;
 		font-family: 'JetBrains Mono', monospace;
 
@@ -75,7 +73,7 @@ const StyledContactInfo = styled(ContactInfo)`
 const Summary = styled.p`
 	font-size: 16px;
 	line-height: 1.8;
-	color: ${(p) => p.theme.textSecondary};
+	color: var(--text-secondary);
 	margin: 20px 0 0 0;
 	max-width: 750px;
 `;
@@ -88,32 +86,32 @@ const StyledSectionTitle = styled(SectionTitle)`
 	font-size: 20px;
 	font-weight: 700;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0 0 24px 0;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	padding: 8px 0;
-	border-bottom: 2px solid ${(p) => p.theme.sectionTitleBorder};
+	border-bottom: 2px solid var(--section-title-border);
 	display: inline-block;
 	min-width: 200px;
 
 	&::before {
 		content: '# ';
-		color: ${(p) => p.theme.accent};
+		color: var(--accent);
 	}
 `;
 
 const StyledWorkItem = styled.div`
 	margin-bottom: 36px;
 	padding-left: 20px;
-	border-left: 3px solid ${(p) => p.theme.border};
+	border-left: 3px solid var(--border);
 
 	&:last-child {
 		margin-bottom: 0;
 	}
 
 	&:hover {
-		border-left-color: ${(p) => p.theme.borderHover};
+		border-left-color: var(--border-hover);
 	}
 `;
 
@@ -134,26 +132,26 @@ const Position = styled.h3`
 	font-size: 18px;
 	font-weight: 600;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0;
 `;
 
 const Company = styled.div`
 	font-size: 16px;
 	font-weight: 500;
-	color: ${(p) => p.theme.accent};
+	color: var(--accent);
 	margin-top: 4px;
 `;
 
 const StyledDateRange = styled(DateRange)`
 	font-size: 14px;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.muted};
+	color: var(--muted);
 `;
 
 const WorkSummary = styled.p`
 	margin: 12px 0;
-	color: ${(p) => p.theme.textTertiary};
+	color: var(--text-tertiary);
 	line-height: 1.7;
 	font-size: 15px;
 `;
@@ -167,14 +165,14 @@ const HighlightsList = styled.ul`
 		position: relative;
 		margin-bottom: 8px;
 		padding-left: 0;
-		color: ${(p) => p.theme.textSecondary};
+		color: var(--text-secondary);
 		line-height: 1.7;
 
 		&::before {
 			content: '→';
 			position: absolute;
 			left: -20px;
-			color: ${(p) => p.theme.accent};
+			color: var(--accent);
 			font-weight: bold;
 		}
 	}
@@ -183,8 +181,8 @@ const HighlightsList = styled.ul`
 const EducationItem = styled.div`
 	margin-bottom: 28px;
 	padding: 20px;
-	background: ${(p) => p.theme.cardBg};
-	border-left: 3px solid ${(p) => p.theme.accent};
+	background: var(--card-bg);
+	border-left: 3px solid var(--accent);
 	border-radius: 2px;
 	transition: background 0.2s ease;
 
@@ -206,19 +204,19 @@ const Degree = styled.h3`
 	font-size: 17px;
 	font-weight: 600;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0;
 `;
 
 const Institution = styled.div`
 	font-size: 15px;
-	color: ${(p) => p.theme.muted};
+	color: var(--muted);
 	margin-top: 4px;
 `;
 
 const StudyType = styled.div`
 	font-size: 14px;
-	color: ${(p) => p.theme.accent};
+	color: var(--accent);
 	margin-top: 4px;
 `;
 
@@ -230,14 +228,14 @@ const SkillsGrid = styled.div`
 
 const SkillCard = styled.div`
 	padding: 16px;
-	background: ${(p) => p.theme.cardBg};
-	border: 1px solid ${(p) => p.theme.border};
+	background: var(--card-bg);
+	border: 1px solid var(--border);
 	border-radius: 2px;
 	transition: all 0.2s ease;
 
 	&:hover {
-		border-color: ${(p) => p.theme.borderHover};
-		background: ${(p) => p.theme.cardBgHover};
+		border-color: var(--border-hover);
+		background: var(--card-bg-hover);
 	}
 `;
 
@@ -245,20 +243,20 @@ const SkillName = styled.h4`
 	font-size: 15px;
 	font-weight: 600;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0 0 10px 0;
 `;
 
 const KeywordList = styled.div`
 	font-size: 13px;
-	color: ${(p) => p.theme.muted};
+	color: var(--muted);
 	line-height: 1.6;
 `;
 
 const ProjectItem = styled.div`
 	margin-bottom: 32px;
 	padding-bottom: 32px;
-	border-bottom: 1px solid ${(p) => p.theme.border};
+	border-bottom: 1px solid var(--border);
 
 	&:last-child {
 		border-bottom: none;
@@ -275,13 +273,13 @@ const ProjectName = styled.h3`
 	font-size: 17px;
 	font-weight: 600;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0 0 8px 0;
 `;
 
 const ProjectDescription = styled.p`
 	font-size: 15px;
-	color: ${(p) => p.theme.textTertiary};
+	color: var(--text-tertiary);
 	line-height: 1.7;
 	margin: 0;
 `;
@@ -295,14 +293,14 @@ const ProjectHighlights = styled.ul`
 		position: relative;
 		margin-bottom: 6px;
 		padding-left: 0;
-		color: ${(p) => p.theme.textTertiary};
+		color: var(--text-tertiary);
 		font-size: 14px;
 
 		&::before {
 			content: '•';
 			position: absolute;
 			left: -20px;
-			color: ${(p) => p.theme.accent};
+			color: var(--accent);
 		}
 	}
 `;
@@ -315,8 +313,8 @@ const SimpleList = styled.div`
 
 const SimpleItem = styled.div`
 	padding: 16px;
-	background: ${(p) => p.theme.cardBg};
-	border-left: 2px solid ${(p) => p.theme.accent};
+	background: var(--card-bg);
+	border-left: 2px solid var(--accent);
 	border-radius: 2px;
 	transition: background 0.2s ease;
 `;
@@ -325,24 +323,23 @@ const ItemTitle = styled.h4`
 	font-size: 15px;
 	font-weight: 600;
 	font-family: 'JetBrains Mono', monospace;
-	color: ${(p) => p.theme.text};
+	color: var(--text);
 	margin: 0 0 8px 0;
 `;
 
 const ItemMeta = styled.div`
 	font-size: 13px;
-	color: ${(p) => p.theme.muted};
+	color: var(--muted);
 	margin-bottom: 6px;
 `;
 
 const ItemDescription = styled.p`
 	font-size: 14px;
-	color: ${(p) => p.theme.textTertiary};
+	color: var(--text-tertiary);
 	margin: 8px 0 0 0;
 	line-height: 1.6;
 `;
 
-// Memoized work item component
 const WorkItem = React.memo(function WorkItem({ job }) {
 	return React.createElement(
 		StyledWorkItem,
@@ -378,7 +375,6 @@ const WorkItem = React.memo(function WorkItem({ job }) {
 	);
 });
 
-// Memoized education item component
 const EducationItemComponent = React.memo(function EducationItemComponent({ edu }) {
 	return React.createElement(
 		EducationItem,
@@ -405,7 +401,6 @@ const EducationItemComponent = React.memo(function EducationItemComponent({ edu 
 	);
 });
 
-// Memoized skill card component
 const SkillCardComponent = React.memo(function SkillCardComponent({ skill }) {
 	return React.createElement(
 		SkillCard,
@@ -417,7 +412,6 @@ const SkillCardComponent = React.memo(function SkillCardComponent({ skill }) {
 	);
 });
 
-// Memoized project item component
 const ProjectItemComponent = React.memo(function ProjectItemComponent({ project }) {
 	return React.createElement(
 		ProjectItem,
@@ -506,7 +500,6 @@ const InterestItem = React.memo(function InterestItem({ item }) {
 	);
 });
 
-// Memoized publication item component
 const PublicationItemComponent = React.memo(function PublicationItemComponent({ pub }) {
 	return React.createElement(
 		ProjectItem,
@@ -531,7 +524,6 @@ const PublicationItemComponent = React.memo(function PublicationItemComponent({ 
 	);
 });
 
-// Memoized reference item component
 const ReferenceItemComponent = React.memo(function ReferenceItemComponent({ reference }) {
 	return React.createElement(
 		ProjectItem,
@@ -541,18 +533,38 @@ const ReferenceItemComponent = React.memo(function ReferenceItemComponent({ refe
 	);
 });
 
-// Memoized header component
-const ResumeHeader = React.memo(function ResumeHeader({ basics, theme, toggle }) {
+const toggleTheme = typeof window !== 'undefined' ? window.toggleResumeTheme : null;
+
+function ResumeHeader({ basics }) {
 	return React.createElement(
 		Header,
 		null,
-		React.createElement(ThemeToggle, { theme, onToggle: toggle }),
+		React.createElement('button', {
+			id: 'theme-toggle',
+			'aria-label': 'Toggle theme',
+			onClick: toggleTheme,
+			style: {
+				position: 'absolute',
+				top: '16px',
+				right: '0',
+				background: 'transparent',
+				border: 'none',
+				cursor: 'pointer',
+				padding: '8px',
+				borderRadius: '50%',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				color: 'var(--muted)',
+				transition: 'color 0.2s ease',
+			},
+		}),
 		React.createElement(Name, null, basics.name),
 		basics.label && React.createElement(Label, null, basics.label),
 		React.createElement(StyledContactInfo, { basics }),
 		basics.summary && React.createElement(Summary, null, basics.summary),
 	);
-});
+}
 
 function ResumeSection({ key, title, children }) {
 	if (!children) return null;
@@ -565,13 +577,12 @@ function ResumeSection({ key, title, children }) {
 }
 
 function Resume({ resume }) {
-	const { theme, toggle } = useTheme();
 	const basics = resume.basics || {};
 
 	return React.createElement(
 		Layout,
 		null,
-		React.createElement(ResumeHeader, { basics, theme, toggle }),
+		React.createElement(ResumeHeader, { basics }),
 
 		ResumeSection({
 			key: 'work',

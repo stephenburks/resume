@@ -1,50 +1,57 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
-const { light, dark } = require('../theme');
+const { light, dark, buildThemeCss } = require('../theme');
 
-const expectedKeys = [
-	'background',
-	'cardBg',
-	'cardBgHover',
-	'text',
-	'textSecondary',
-	'textTertiary',
-	'muted',
-	'accent',
-	'border',
-	'borderHover',
-	'headerBorder',
-	'sectionTitleBorder',
-	'toggleBg',
-	'toggleIcon',
-	'tooltipBg',
-	'tooltipText',
+const expectedVars = [
+	'--background',
+	'--card-bg',
+	'--card-bg-hover',
+	'--text',
+	'--text-secondary',
+	'--text-tertiary',
+	'--muted',
+	'--accent',
+	'--border',
+	'--border-hover',
+	'--header-border',
+	'--section-title-border',
+	'--toggle-bg',
+	'--toggle-icon',
+	'--tooltip-bg',
+	'--tooltip-text',
 ];
 
 describe('theme', () => {
-	it('light has all expected keys', () => {
-		for (const key of expectedKeys) {
-			assert.ok(key in light, `light missing key: ${key}`);
+	it('light has all expected CSS variables', () => {
+		for (const cssVar of expectedVars) {
+			assert.ok(cssVar in light, `light missing CSS variable: ${cssVar}`);
 		}
 	});
 
-	it('dark has all expected keys', () => {
-		for (const key of expectedKeys) {
-			assert.ok(key in dark, `dark missing key: ${key}`);
+	it('dark has all expected CSS variables', () => {
+		for (const cssVar of expectedVars) {
+			assert.ok(cssVar in dark, `dark missing CSS variable: ${cssVar}`);
 		}
 	});
 
 	it('light values are hex colors', () => {
 		const hexRe = /^#[0-9a-fA-F]{6}$/;
-		for (const key of expectedKeys) {
-			assert.match(light[key], hexRe, `light.${key} is not a hex color`);
+		for (const cssVar of expectedVars) {
+			assert.match(light[cssVar], hexRe, `light.${cssVar} is not a hex color`);
 		}
 	});
 
 	it('dark values are hex colors', () => {
 		const hexRe = /^#[0-9a-fA-F]{6}$/;
-		for (const key of expectedKeys) {
-			assert.match(dark[key], hexRe, `dark.${key} is not a hex color`);
+		for (const cssVar of expectedVars) {
+			assert.match(dark[cssVar], hexRe, `dark.${cssVar} is not a hex color`);
+		}
+	});
+
+	it('buildThemeCss produces valid CSS', () => {
+		const css = buildThemeCss(light);
+		for (const cssVar of expectedVars) {
+			assert.ok(css.includes(`${cssVar}:`), `CSS output missing ${cssVar}`);
 		}
 	});
 });
